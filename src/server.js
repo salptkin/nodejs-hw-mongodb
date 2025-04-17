@@ -21,10 +21,11 @@ const setupServer = () => {
         },
       },
     }),
-    );
-    
+  );
+  // All Routes
   app.use('/', rootRouter);
   app.use('/contacts', contactsRouter);
+
   app.use('*', notFoundHandler);
   app.use(errorHandler);
 

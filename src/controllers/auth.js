@@ -1,4 +1,4 @@
-import { THIRTY_DAY } from '../constants/sortOrder.js';
+import { THIRTY_DAY } from '../constants/index.js';
 import {
   loginUser,
   logoutUser,

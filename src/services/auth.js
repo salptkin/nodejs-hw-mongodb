@@ -3,7 +3,7 @@ import { UsersCollection } from '../db/models/user.js';
 import { SessionsCollection } from '../db/models/session.js';
 import bcrypt from 'bcrypt';
 import { randomBytes } from 'crypto';
-import { FIFTEEN_MINUTES, THIRTY_DAY } from '../constants/sortOrder.js';
+import { FIFTEEN_MINUTES, THIRTY_DAY } from '../constants/index.js';
 
 export const registerUser = async (payload) => {
   const user = await UsersCollection.findOne({ email: payload.email });

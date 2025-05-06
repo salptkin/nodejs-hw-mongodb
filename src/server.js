@@ -5,12 +5,14 @@ import rootRouter from './routers/root.js';
 import contactsRouter from './routers/contacts.js';
 import errorHandler from './middlewares/errorHandler.js';
 import notFoundHandler from './middlewares/notFoundHandler.js';
+import cookieParser from 'cookie-parser';
 
 const PORT = process.env.PORT;
 
 const setupServer = () => {
   const app = express();
   app.use(cors());
+  app.use(cookieParser());
   app.use(express.json());
   app.use(
     pinoHttp({

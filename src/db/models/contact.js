@@ -1,4 +1,4 @@
-import { Schema, model } from 'mongoose';
+import { model, Schema } from 'mongoose';
 
 const contactSchema = new Schema(
   {
@@ -17,16 +17,21 @@ const contactSchema = new Schema(
       type: Boolean,
       default: false,
     },
+
     contactType: {
       type: String,
       enum: ['work', 'home', 'personal'],
       required: true,
       default: 'personal',
     },
+    userId: { type: Schema.Types.ObjectId, ref: 'users' },
+    photoUrl: { 
+      type: String,
+    },
   },
-  { timestamps: true, versionKey: false },
+  {
+    timestamps: true,
+  },
 );
 
-const Contact_Model = model('allcontacts', contactSchema);
-
-export default Contact_Model;
+export const ContactsCollection = model('Contact', contactSchema);

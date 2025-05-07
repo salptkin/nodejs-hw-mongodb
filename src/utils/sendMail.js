@@ -1,15 +1,26 @@
 import nodemailer from 'nodemailer';
-import { SMTP } from '../constants/index.js';
 import { env } from './env.js';
 
-const transporter = nodemailer.createTransport({
-  host: env(SMTP.SMTP_HOST),
-  port: Number(env(SMTP.SMTP_PORT)),
-  auth: {
-    user: env(SMTP.SMTP_USER),
-    pass: env(SMTP.SMTP_PASSWORD),
-  },
-});
+export const sendMail = async (options) => {
+  const transporter = nodemailer.createTransport({
+    host: env('SMTP_HOST'),
+    port: env('SMTP_PORT'),
+    auth: {
+      user: env('SMTP_USER'),
+      pass: env('SMTP_PASSWORD'),
+    },
+  });
+
+  try {
+    await transporter.verify();
+    console.log('SMTP connection is valid');
+  } catch (error) {
+    console.log('SMTP connection is invalid', error);
+    throw new Error('SMTP connection is invalid');
+  }
+
+  return await transporter.sendMail(options);
+};
 
 export const sendEmail = async (options) => {
   return await transporter.sendMail(options);

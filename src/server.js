@@ -8,6 +8,7 @@ import notFoundHandler from './middlewares/notFoundHandler.js';
 import cookieParser from 'cookie-parser';
 import { UPLOAD_DIR } from './constants/index.js';
 import { ctrlWrapper } from './utils/ctrlWrapper.js';
+import { swaggerDocs } from './middlewares/swaggerDocs.js';
 
 const PORT = process.env.PORT;
 
@@ -17,6 +18,7 @@ const setupServer = () => {
   app.use(cors());
   app.use(cookieParser());
   app.use('/uploads', express.static(UPLOAD_DIR));
+  app.use('/api-docs', swaggerDocs());
   app.use(
     express.json({
       type: ['application/json', 'application/vnd.api+json'],
